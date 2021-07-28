@@ -17,7 +17,6 @@ class _VoucherClaimedState extends State<VoucherClaimed> {
   int i =0;
   var point;
   int cat = 0;
-  int val = 0;
   List <int> counter = [];
   String current = '';
   int dog = 0;

@@ -41,7 +41,8 @@ class _ProductDisplayState extends State<ProductDisplay> {
                   'blgno': '00',
                   'street' : '000',
                   'zone' : '00',
-                  'points' : points.toString()
+                  'points' : points.toString(),
+                  'vouchers' : data['vouchers']
                 });
               },
               child: Text('Back to Home',style: TextStyle(color: Colors.white),)
@@ -145,7 +146,8 @@ class _ProductDisplayState extends State<ProductDisplay> {
                     'size' : dropdownvalue,
                     'counter' : counter.toString(),
                     'description' : data['description'],
-                    'points' : points.toString()
+                    'points' : points.toString(),
+                    'vouchers' : data['vouchers']
                   });
                   },
                 label: Text('Add to Cart',style: TextStyle(color: Colors.black),),

@@ -38,7 +38,8 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   'blgno': '00',
                   'street' : '000',
                   'zone' : '00',
-                  'points' : total.toString()
+                  'points' : total.toString(),
+                  'vouchers' : 'p'
                 });
               },
               child: Text('Back to Home',style: TextStyle(color: Colors.white),)

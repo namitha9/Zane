@@ -9,18 +9,37 @@ class ConfirmDeets extends StatefulWidget {
 
 class _ConfirmDeetsState extends State<ConfirmDeets> {
   Map data = {};
+  String blgno = '00';
+  String street = '000';
+  String zone = '00';
+  var Total;
+  int points = 0;
+  String vouchers = '';
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments as Map;
-    String total = data['total'];
-    var Total = int.parse(total);
-    double pointS = Total/10;
-    int points = pointS.toInt();
-    Total = (Total>300) ? Total : Total+10;
-    //String address = data['address'];
-    String blgno = data['blgno'];
-    String street = data['street'];
-    String zone = data['zone'];
+    if(data['total']!=-1 && data['vouchers']!='v'){
+      String total = data['total'];
+      Total = int.parse(total);
+      double pointS = Total/10;
+      points = pointS.toInt();
+      Total = (Total>300) ? Total : Total+10;
+      //String address = data['address'];
+      blgno = data['blgno'];
+      street = data['street'];
+      zone = data['zone'];
+      vouchers = data['vouchers'];
+    }
+    if(data['total']==-1 && data['vouchers']!='v'){
+      Total = Total-int.parse(data['vouchers']);
+      vouchers = data['vouchers'];
+    }
+    if(data['total']!=-1 && data['vouchers']=='v'){
+      String total = data['total'];
+      Total = int.parse(total);
+      double pointS = Total/10;
+      points = pointS.toInt();
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
@@ -40,6 +59,18 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
               ],
             ),
             Text('(with shipping costs)' ,style: TextStyle(fontSize: 12)),
+            SizedBox(height: 20,),
+            ElevatedButton(
+                onPressed: (){
+                  print(data['vouchers']);
+                  print(vouchers);
+                  Navigator.pushReplacementNamed(context, '/Voucher', arguments: {
+                    'count' : vouchers,
+                    'points' : points.toString(),
+                    'total' : Total.toString()
+                  });
+                },
+                child: Text('Apply Voucher >')),
             SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

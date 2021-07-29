@@ -130,9 +130,9 @@ class _AccountScreenState extends State<AccountScreen> {
                             SizedBox(height: 20,),
                             TextButton(
                                 onPressed: (){
-                                  Navigator.pushReplacementNamed(context, '/Voucher',arguments: {
-                                    'pointlist' : pointlist,
-                                    'count' : count
+                                  Navigator.pushReplacementNamed(context, '/VoucherDisplay',arguments: {
+                                    'count' : count,
+                                    'points' : points.toString()
                                   });
                                 },
                                 child: Text('Vouchers Claimed >')

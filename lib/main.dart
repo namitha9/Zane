@@ -3,6 +3,7 @@ import 'package:zane_shop/CartScreen.dart';
 import 'package:zane_shop/ConfirmDeets.dart';
 import 'package:zane_shop/ProductDisplay.dart';
 import 'package:zane_shop/ProductList.dart';
+import 'package:zane_shop/VouchersClaimed.dart';
 import 'LoadingPage.dart';
 import 'HomePage.dart';
 import 'ProductDisplay.dart';
@@ -14,6 +15,7 @@ import 'ProductSelect.dart';
 import 'ProductList.dart';
 import 'EditProfile.dart';
 import 'Benefits.dart';
+import 'VoucherApply.dart';
 import 'VouchersClaimed.dart';
 
 void main() {
@@ -31,7 +33,8 @@ void main() {
       '/List' : (context) => ProductList(),
       '/Edit' : (context) => EditProfile(),
       '/Benefits' : (context) => Benefits(),
-      '/Voucher' : (context) => VoucherClaimed(),
+      '/Voucher' : (context) => VoucherApply(),
+      '/VoucherDisplay' : (context) => VoucherClaimed()
     },
   ));
 }

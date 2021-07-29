@@ -22,7 +22,8 @@ class _loadingState extends State<loading> {
         'blgno': '00',
         'street' : '000',
         'zone' : '00',
-        'points' : '0'
+        'points' : '0',
+        'vouchers' : 'p'
       });
     });
   }
@@ -52,7 +53,8 @@ class _loadingState extends State<loading> {
                 'blgno': '00',
                 'street' : '000',
                 'zone' : '00',
-                'points' : '0'
+                'points' : '0',
+                'vouchers' : 'p'
               });
             },
             child: Column(

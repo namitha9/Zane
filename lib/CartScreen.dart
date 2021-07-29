@@ -26,7 +26,7 @@ class _CartScreenState extends State<CartScreen> {
     if (data['items'] != null){
       items = List.from(data['items']);
     }
-    print(items);
+    //print(items);
     var Total = int.parse(data['total']);
     var points = int.parse(data['points']);
     return Scaffold(
@@ -46,7 +46,8 @@ class _CartScreenState extends State<CartScreen> {
                   'blgno': '00',
                   'street' : '000',
                   'zone' : '00',
-                  'points' : points.toString()
+                  'points' : points.toString(),
+                  'vouchers' : 'p'
                 });
               },
               child: Text('Back to Home', style: TextStyle(color: Colors.white),)
@@ -105,6 +106,7 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                             ElevatedButton(
                               onPressed: (){
+                                print(data['vouchers']);
                                 Navigator.pushReplacementNamed(context, '/Confirm', arguments:{
                                   'total' : Total.toString() ,
                                   'name' : data['name'],
@@ -112,6 +114,7 @@ class _CartScreenState extends State<CartScreen> {
                                   'blgno': data['blgno'],
                                   'street' : data['street'],
                                   'zone' : data['zone'],
+                                  'vouchers' : data['vouchers']
                                 });
                               },
                               style: ElevatedButton.styleFrom(

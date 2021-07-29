@@ -46,6 +46,7 @@ class _homepageState extends State<homepage> {
   static int now = 0;
 
   String count = '';
+  //String vouchers = 'p';
 
    void detailschange(){
      if (data['name'] != 'Name'){
@@ -82,6 +83,7 @@ class _homepageState extends State<homepage> {
     }
     else {
       detailschange();
+      print(count);
       return AccountScreen( total :points, name: name, email : email, blgno : blgno, street: street, zone : zone, count : count);
     }
   }
@@ -95,7 +97,8 @@ class _homepageState extends State<homepage> {
           'picture': instance.picture ,
           'price' : instance.price,
           'description' : instance.description,
-          'points' : points
+          'points' : points,
+          'vouchers' : count
         });
       },
       child: Column(
@@ -572,6 +575,10 @@ class _homepageState extends State<homepage> {
     if (data['counter']!='c'){
       count = data['counter'];
     }
+    if (data['vouchers']!='p'){
+      count = data['vouchers'];
+      print(count);
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
@@ -586,7 +593,8 @@ class _homepageState extends State<homepage> {
                   'blgno': blgno,
                   'street' : street,
                   'zone' : zone,
-                  'points' : points.toString()
+                  'points' : points.toString(),
+                  'vouchers' : count
                 });
               },
               icon: Icon(Icons.shopping_cart_outlined)

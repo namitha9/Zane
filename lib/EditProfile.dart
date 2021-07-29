@@ -132,7 +132,8 @@ class _EditProfileState extends State<EditProfile> {
                           'blgno': blgno.text=='' ? data['blgno'] : blgno.text,
                           'street' : street.text=='' ? data['street'] : street.text,
                           'zone' : zone.text=='' ? data['zone'] : zone.text,
-                          'points' : data['points']
+                          'points' : data['points'],
+                          'vouchers' : []
                         });
                       },
                       child: Text('Update Info')
@@ -150,7 +151,8 @@ class _EditProfileState extends State<EditProfile> {
                           'blgno': data['blgno'],
                           'street' : data['street'],
                           'zone' : data['zone'],
-                          'points' : data['points']
+                          'points' : data['points'],
+                          'vouchers' : []
                         });
                         },
                       child: Text('Cancel')

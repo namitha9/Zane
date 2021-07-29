@@ -72,7 +72,8 @@ class _ProductListState extends State<ProductList> {
                   'blgno': '00',
                   'street' : '000',
                   'zone' : '00',
-                  'points' : data['points']
+                  'points' : data['points'],
+                  'vouchers' : 'p'
                 });
               },
               child: Text('Back to Home', style: TextStyle(color: Colors.white),)

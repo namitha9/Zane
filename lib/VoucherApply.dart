@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'VoucherCard.dart';
+import 'VoucherApplyCard.dart';
 import 'PointList.dart';
 
-class VoucherClaimed extends StatefulWidget {
-  const VoucherClaimed({Key? key}) : super(key: key);
+class VoucherApply extends StatefulWidget {
+  const VoucherApply({Key? key}) : super(key: key);
 
   @override
-  _VoucherClaimedState createState() => _VoucherClaimedState();
+  _VoucherApplyState createState() => _VoucherApplyState();
 }
 
-class _VoucherClaimedState extends State<VoucherClaimed> {
+class _VoucherApplyState extends State<VoucherApply> {
 
   Map data = {};
   static List <PointList> pointlist =  [
@@ -34,10 +34,10 @@ class _VoucherClaimedState extends State<VoucherClaimed> {
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments as Map;
-    count = data['count'];
     if (i==0){
       //poinT = int.parse(data['points']);
       //pointlist = List.from(data['pointlist']);
+      count = data['count'];
       dog = count.length;
 
       for (int k=0;k<dog;k++){
@@ -78,43 +78,38 @@ class _VoucherClaimedState extends State<VoucherClaimed> {
             TextButton(
                 onPressed: (){
                   print(count);
-                  Navigator.pushReplacementNamed(context,'/HomePage',arguments: {
-                    'picture' : 'p',
-                    'price' : 'p',
-                    'size' : 's',
-                    'counter' : 'c',
-                    'delete' : 'no',
+                  Navigator.pushReplacementNamed(context,'/Confirm',arguments: {
+                    'total' : data['total'],
                     'name' : 'Name',
                     'email' : 'Email',
                     'blgno': '00',
                     'street' : '000',
                     'zone' : '00',
-                    'points' : data['points'],
                     'vouchers' : count
                   });
                 },
-                child: Text('Back to Home', style: TextStyle(color: Colors.white),)
+                child: Text('Back to Order', style: TextStyle(color: Colors.white),)
             )
           ]
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Your Vouchers', style: TextStyle(fontSize: 25),),
-                SizedBox(height: 10,),
-                Text('the vouchers you have claimed and can apply these vouchers to the next purchase', style: TextStyle(fontSize: 13),),
-                Column(
-                  children: pointList.map((e) => VoucherCard(
-                    pointlist: e,
-                  )).toList(),
-                ),
-              ],
-            ),
-          )
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Your Vouchers', style: TextStyle(fontSize: 25),),
+                  SizedBox(height: 10,),
+                  Text('the vouchers you have claimed and can apply these vouchers to the next purchase', style: TextStyle(fontSize: 13),),
+                  Column(
+                    children: pointList.map((e) => VoucherApplyCard(
+                      pointlist: e,
+                    )).toList(),
+                  ),
+                ],
+              ),
+            )
         ),
       ),
     );

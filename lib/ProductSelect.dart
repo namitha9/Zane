@@ -94,7 +94,8 @@ class _ProductSelectState extends State<ProductSelect> {
                           'blgno': '00',
                           'street' : '000',
                           'zone' : '00',
-                          'points' : points.toString()
+                          'points' : points.toString(),
+                          'vouchers' : 'p'
                         });
                       },
                       child: Text('Confirm Item', style: TextStyle(color: Colors.white),),
@@ -113,7 +114,8 @@ class _ProductSelectState extends State<ProductSelect> {
                         'blgno': '00',
                         'street' : '000',
                         'zone' : '00',
-                        'points' : points.toString()
+                        'points' : points.toString(),
+                        'vouchers' : 'p'
                       });
                     },
                     child: Text('Change Item', style: TextStyle(color: Colors.white),),

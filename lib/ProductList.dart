@@ -26,7 +26,8 @@ class _ProductListState extends State<ProductList> {
             'picture': instance.picture ,
             'price' : instance.price,
             'description' : instance.description,
-            'points' : points
+            'points' : points,
+            'vouchers' : data['vouchers']
           });
         },
         child: Column(

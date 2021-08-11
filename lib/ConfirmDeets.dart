@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'PointList.dart';
 
 class ConfirmDeets extends StatefulWidget {
   const ConfirmDeets({Key? key}) : super(key: key);
@@ -15,10 +16,35 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
   var Total;
   int points = 0;
   String vouchers = '';
+  String offerno = '';
+  String op = '';
+  String restric = '';
+  String extra = '';
+
+  static List <PointList> pointlist =  [
+    PointList(point: '100', description: '5% off on Purchases above QR 200', i: '5%200'),
+    PointList(point: '250', description: 'QR 25 off on Purchases above QR 200', i: '25-200') ,
+    PointList(point: '300', description: 'Free Zane Limited Edition Bag', i: 'free,0'),
+    PointList(point: '500', description: 'QR 100 Voucher', i: '100v0'),
+    PointList(point: '500', description: '25% CashBack on Purchases above QR 250', i: '25%250'),
+    PointList(point: '750', description: '35% Off on your Next Purchase', i: '35%0'),
+    PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or More', i: 'free,0'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments as Map;
-    if(data['total']!=-1 && data['vouchers']!='v'){
+    print('n');
+
+    bool isNumeric(String s){
+      if(s==null){
+        return false;
+      }
+      return int.tryParse(s) != null;
+    }
+
+    if(data['total']!='-1' && data['vouchers']!='v'){
+      print('first');
       String total = data['total'];
       Total = int.parse(total);
       double pointS = Total/10;
@@ -30,16 +56,75 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
       zone = data['zone'];
       vouchers = data['vouchers'];
     }
-    if(data['total']==-1 && data['vouchers']!='v'){
-      Total = Total-int.parse(data['vouchers']);
-      vouchers = data['vouchers'];
+
+    if(data['total']=='-1' && data['vouchers']!='v'){
+      print('second');
+      String total = data['name'];
+      print(total);
+      Total = int.parse(total);
+      double pointS = Total/10;
+      points = pointS.toInt();
+      Total = (Total>300) ? Total : Total+10;
+      vouchers = data['vouchers']=='p' ? '' : data['vouchers'];
+      for(PointList instance in pointlist){
+        if(instance.point == data['zone']){
+          for(int t=0;t<instance.i.length;t++){
+            if (isNumeric(instance.i[t])){
+              offerno += instance.i[t];
+            }
+            else{
+              op = instance.i[t];
+              restric = instance.i.substring(t+1,instance.i.length);
+              break;
+            }
+          }
+          print(offerno);
+          print(op);
+          print(restric);
+        }
+      }
+      if(int.parse(restric)<=Total){
+        if(op == '%'){
+          Total = Total-(int.parse(offerno)*(Total%100));
+          print(Total);
+        }
+        if(op == '-'){
+          Total = Total - int.parse(offerno);
+        }
+        if(op == ','){
+          extra = 'Free Stuff';
+        }
+        if(op == 'v'){
+          extra = 'QR 100 Voucher to be delivered';
+        }
+          showDialog(
+              context: context,
+              builder: (BuildContext context) =>
+                  AlertDialog(
+                    title: Text('Voucher Applied'),
+                    content: Text(
+                        'Current Total = $Total \n $extra'),
+                    actions: [
+                      TextButton(onPressed: () {
+                        Navigator.pop(context);
+                      },
+                          child: Text('Cancel')),
+                    ],
+                  )
+          );
+        }
     }
-    if(data['total']!=-1 && data['vouchers']=='v'){
+
+    if(data['total']!='-1' && data['vouchers']=='v'){
+      print('third');
       String total = data['total'];
       Total = int.parse(total);
       double pointS = Total/10;
       points = pointS.toInt();
+      vouchers = data['vouchers'];
     }
+    print(data['vouchers']);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
@@ -94,9 +179,11 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
                 ElevatedButton(
                     onPressed: (){
                       print(points);
+                      print(vouchers);
                       Navigator.pushReplacementNamed(context, '/Payment', arguments: {
                         'points' : points.toString(),
-                        'email' : data['email']
+                        'email' : data['email'],
+                        'vouchers' : vouchers
                       });
                       },
                     child: Text('CONFIRM'),

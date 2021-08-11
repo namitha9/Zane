@@ -23,6 +23,7 @@ class _CartScreenState extends State<CartScreen> {
     data = ModalRoute.of(context)!.settings.arguments as Map;
     //print(data);
     print(data['items']);
+    print(data['vouchers']);
     if (data['items'] != null){
       items = List.from(data['items']);
     }
@@ -47,7 +48,7 @@ class _CartScreenState extends State<CartScreen> {
                   'street' : '000',
                   'zone' : '00',
                   'points' : points.toString(),
-                  'vouchers' : 'p'
+                  'vouchers' : data['vouchers']
                 });
               },
               child: Text('Back to Home', style: TextStyle(color: Colors.white),)

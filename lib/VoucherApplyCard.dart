@@ -5,8 +5,10 @@ import 'PointList.dart';
 class VoucherApplyCard extends StatefulWidget {
 
   PointList pointlist;
+  String total;
+  String count;
 
-  VoucherApplyCard({Key? key, required this.pointlist})
+  VoucherApplyCard({Key? key, required this.pointlist, required this.total, required this.count})
       : super(key: key);
 
   @override
@@ -20,6 +22,8 @@ class _VoucherApplyCardState extends State<VoucherApplyCard> {
   Widget build(BuildContext context) {
 
     var indipoint = int.parse(widget.pointlist.point);
+    var Total = int.parse(widget.total);
+    String newvouch = '';
 
     return Card(
       margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -35,14 +39,34 @@ class _VoucherApplyCardState extends State<VoucherApplyCard> {
               children: [
                 TextButton(
                   onPressed: (){
+                    setState(() {
+                      String current = '';
+                      for (int i=0;i<widget.count.length;i++){
+                        String m = widget.count[i];
+                        if(m!=','){
+                          current+=m;
+                        }
+                        else{
+                          if(int.parse(current)!=indipoint){
+                            newvouch += current+',';
+                          }
+                        }
+                      }
+                      if (newvouch == ''){
+                        newvouch = 'p';
+                      }
+                    });
+                    print(widget.pointlist.point);
+                    print(newvouch);
+                    print(Total);
                     Navigator.pushReplacementNamed(context, '/Confirm',arguments: {
-                      'total' : -1,
-                      'name' : 'Name',
+                      'total' : '-1',
+                      'name' : Total.toString(),
                       'email' : 'Email',
                       'blgno': '00',
                       'street' : '000',
-                      'zone' : '00',
-                      'vouchers' : widget.pointlist.point.toString()
+                      'zone' : widget.pointlist.point,
+                      'vouchers' : newvouch
                   });
                     },
                   child: Text('Apply >'),

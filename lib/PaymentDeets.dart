@@ -79,9 +79,11 @@ class _PaymentDeetsState extends State<PaymentDeets> {
                 ElevatedButton(
                     onPressed: (){
                       print(data['points']);
+                      print(data['vouchers']);
                       Navigator.pushReplacementNamed(context, '/Placed', arguments: {
                         'points' : data['points'],
-                        'email' : data['email']
+                        'email' : data['email'],
+                        'vouchers' : data['vouchers']
                       });
                     },
                     child: Text('PAY'),
@@ -112,7 +114,8 @@ class _PaymentDeetsState extends State<PaymentDeets> {
                 print(data['points']);
                 Navigator.pushReplacementNamed(context, '/Placed', arguments: {
                   'points' : data['points'],
-                  'email' : data['email']
+                  'email' : data['email'],
+                  'vouchers' : data['vouchers']
                 });
                 },
               child: Text('Place Order'),

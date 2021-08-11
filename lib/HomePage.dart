@@ -46,7 +46,7 @@ class _homepageState extends State<homepage> {
   static int now = 0;
 
   String count = '';
-  //String vouchers = 'p';
+  String vouchers = '';
 
    void detailschange(){
      if (data['name'] != 'Name'){
@@ -295,7 +295,8 @@ class _homepageState extends State<homepage> {
                       onPressed: (){
                         Navigator.pushReplacementNamed(context, '/List',arguments: {
                           'totalitems' : totalitems,
-                          'points' : points
+                          'points' : points,
+                          'vouchers' : count
                         });
                       },
                       child: Text('More >',
@@ -525,7 +526,7 @@ class _homepageState extends State<homepage> {
                 children: [
                   Text('Most Loved Styles'),
                   TextButton(
-                      onPressed: (){Navigator.pushReplacementNamed(context, '/List',arguments: {'totalitems' : totalitems,'points': points});},
+                      onPressed: (){Navigator.pushReplacementNamed(context, '/List',arguments: {'totalitems' : totalitems,'points': points, 'vouchers' : count});},
                       child: Text('More >')
                   )
                 ],
@@ -572,9 +573,9 @@ class _homepageState extends State<homepage> {
       now = 0;
       counteritem = 0;
     }
-    if (data['counter']!='c'){
-      count = data['counter'];
-    }
+    //if (data['counter']!='c'){
+      //count = data['counter'];
+    //}
     if (data['vouchers']!='p'){
       count = data['vouchers'];
       print(count);

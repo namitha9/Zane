@@ -95,7 +95,7 @@ class _ProductSelectState extends State<ProductSelect> {
                           'street' : '000',
                           'zone' : '00',
                           'points' : points.toString(),
-                          'vouchers' : 'p'
+                          'vouchers' : data['vouchers']
                         });
                       },
                       child: Text('Confirm Item', style: TextStyle(color: Colors.white),),
@@ -115,7 +115,7 @@ class _ProductSelectState extends State<ProductSelect> {
                         'street' : '000',
                         'zone' : '00',
                         'points' : points.toString(),
-                        'vouchers' : 'p'
+                        'vouchers' : data['vouchers']
                       });
                     },
                     child: Text('Change Item', style: TextStyle(color: Colors.white),),

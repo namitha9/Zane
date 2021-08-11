@@ -13,13 +13,13 @@ class _VoucherApplyState extends State<VoucherApply> {
 
   Map data = {};
   static List <PointList> pointlist =  [
-    PointList(point: '100', description: '5% off on Purchases above QR 200', i: 0),
-    PointList(point: '250', description: 'QR 25 off on Purchases above QR 200', i: 0) ,
-    PointList(point: '300', description: 'Free Zane Limited Edition Bag', i: 0),
-    PointList(point: '500', description: 'QR 100 Voucher', i: 0),
-    PointList(point: '500', description: '25% CashBack on Purchases above QR 250', i: 0),
-    PointList(point: '750', description: '35% Off on your Next Purchase', i: 0),
-    PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or More', i: 0),
+    PointList(point: '100', description: '5% off on Purchases above QR 200', i: '0'),
+    PointList(point: '250', description: 'QR 25 off on Purchases above QR 200', i: '0') ,
+    PointList(point: '300', description: 'Free Zane Limited Edition Bag', i: '0'),
+    PointList(point: '500', description: 'QR 100 Voucher', i: '0'),
+    PointList(point: '500', description: '25% CashBack on Purchases above QR 250', i: '0'),
+    PointList(point: '750', description: '35% Off on your Next Purchase', i: '0'),
+    PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or More', i: '0'),
   ];
   static String count = '';
   int i =0;
@@ -105,6 +105,8 @@ class _VoucherApplyState extends State<VoucherApply> {
                   Column(
                     children: pointList.map((e) => VoucherApplyCard(
                       pointlist: e,
+                      total : data['total'],
+                      count : count
                     )).toList(),
                   ),
                 ],

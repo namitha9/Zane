@@ -20,7 +20,9 @@ class _OrderPlacedState extends State<OrderPlaced> {
     poInts = poInts.toString();
     var Points = int.parse(poInts);
     total += Points;
+    print(total);
     Points = 0;
+    print(data['vouchers']);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
@@ -39,7 +41,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   'street' : '000',
                   'zone' : '00',
                   'points' : total.toString(),
-                  'vouchers' : 'p'
+                  'vouchers' : data['vouchers']
                 });
               },
               child: Text('Back to Home',style: TextStyle(color: Colors.white),)

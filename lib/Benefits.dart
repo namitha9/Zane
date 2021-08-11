@@ -15,13 +15,13 @@ class _BenefitsState extends State<Benefits> {
   var poinT;
 
   List <PointList> pointlist = [
-    PointList(point: '100', description: '5% off on Purchases above QR 200', i: 0),
-    PointList(point: '250', description: 'QR 25 off on Purchases above QR 200', i: 0) ,
-    PointList(point: '300', description: 'Free Zane Limited Edition Bag', i: 0),
-    PointList(point: '500', description: 'QR 100 Voucher', i: 0),
-    PointList(point: '500', description: '25% CashBack on Purchases above QR 250', i: 0),
-    PointList(point: '750', description: '35% Off on your Next Purchase', i: 0),
-    PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or more', i: 0)
+    PointList(point: '100', description: '5% off on Purchases above QR 200', i: '0'),
+    PointList(point: '250', description: 'QR 25 off on Purchases above QR 200', i: '0') ,
+    PointList(point: '300', description: 'Free Zane Limited Edition Bag', i: '0'),
+    PointList(point: '500', description: 'QR 100 Voucher', i: '0'),
+    PointList(point: '500', description: '25% CashBack on Purchases above QR 250', i: '0'),
+    PointList(point: '750', description: '35% Off on your Next Purchase', i: '0'),
+    PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or more', i: '0')
   ];
 
   String count = '';
@@ -93,7 +93,7 @@ class _BenefitsState extends State<Benefits> {
                     'picture' : 'p',
                     'price' : 'p',
                     'size' : 's',
-                    'counter' : count,
+                    'counter' : 'c',
                     'delete' : 'no',
                     'name' : 'Name',
                     'email' : 'Email',
@@ -101,7 +101,7 @@ class _BenefitsState extends State<Benefits> {
                     'street' : '000',
                     'zone' : '00',
                     'points' : poinT.toString(),
-                    'vouchers' : 'p',
+                    'vouchers' : count,
                   });
                 },
                 child: Text('Back to Home', style: TextStyle(color: Colors.white),)

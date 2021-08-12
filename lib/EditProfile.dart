@@ -133,7 +133,7 @@ class _EditProfileState extends State<EditProfile> {
                           'street' : street.text=='' ? data['street'] : street.text,
                           'zone' : zone.text=='' ? data['zone'] : zone.text,
                           'points' : data['points'],
-                          'vouchers' : []
+                          'vouchers' : 'p'
                         });
                       },
                       child: Text('Update Info')
@@ -152,7 +152,7 @@ class _EditProfileState extends State<EditProfile> {
                           'street' : data['street'],
                           'zone' : data['zone'],
                           'points' : data['points'],
-                          'vouchers' : []
+                          'vouchers' : 'p'
                         });
                         },
                       child: Text('Cancel')

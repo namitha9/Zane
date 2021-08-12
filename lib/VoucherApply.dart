@@ -103,7 +103,8 @@ class _VoucherApplyState extends State<VoucherApply> {
                   SizedBox(height: 10,),
                   Text('the vouchers you have claimed and can apply these vouchers to the next purchase', style: TextStyle(fontSize: 13),),
                   Column(
-                    children: pointList.map((e) => VoucherApplyCard(
+                    children: pointList.map((e) =>
+                        VoucherApplyCard(
                       pointlist: e,
                       total : data['total'],
                       count : count

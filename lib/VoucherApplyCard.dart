@@ -22,7 +22,7 @@ class _VoucherApplyCardState extends State<VoucherApplyCard> {
   Widget build(BuildContext context) {
 
     var indipoint = int.parse(widget.pointlist.point);
-    var Total = int.parse(widget.total);
+    var Total = double.parse(widget.total);
     String newvouch = '';
 
     return Card(

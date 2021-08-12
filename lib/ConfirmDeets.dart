@@ -19,7 +19,9 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
   String offerno = '';
   String op = '';
   String restric = '';
-  String extra = '';
+  String extra = 'None';
+  int y=0;
+  double tot=0;
 
   static List <PointList> pointlist =  [
     PointList(point: '100', description: '5% off on Purchases above QR 200', i: '5%200'),
@@ -46,46 +48,57 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
     if(data['total']!='-1' && data['vouchers']!='v'){
       print('first');
       String total = data['total'];
-      Total = int.parse(total);
+      Total = double.parse(total);
       double pointS = Total/10;
       points = pointS.toInt();
-      Total = (Total>300) ? Total : Total+10;
+      //Total = (Total>300) ? Total : Total+10;
       //String address = data['address'];
       blgno = data['blgno'];
       street = data['street'];
       zone = data['zone'];
       vouchers = data['vouchers'];
+      tot = double.parse(Total.toStringAsFixed(2));
+      if(tot<300){
+        tot+=10;
+      }
     }
 
     if(data['total']=='-1' && data['vouchers']!='v'){
       print('second');
       String total = data['name'];
       print(total);
-      Total = int.parse(total);
+      Total = double.parse(total);
       double pointS = Total/10;
       points = pointS.toInt();
       Total = (Total>300) ? Total : Total+10;
       vouchers = data['vouchers']=='p' ? '' : data['vouchers'];
-      for(PointList instance in pointlist){
-        if(instance.point == data['zone']){
-          for(int t=0;t<instance.i.length;t++){
-            if (isNumeric(instance.i[t])){
-              offerno += instance.i[t];
+      if(y==0) {
+        for (PointList instance in pointlist) {
+          if (instance.point == data['zone']) {
+            int x = 1;
+            for (int t = 0; t < x; t++) {
+              if (isNumeric(instance.i[t])) {
+                offerno += instance.i[t];
+                x++;
+              }
+              else {
+                op = instance.i[t];
+                restric = instance.i.substring(t + 1, instance.i.length);
+              }
             }
-            else{
-              op = instance.i[t];
-              restric = instance.i.substring(t+1,instance.i.length);
-              break;
-            }
+            print(offerno);
+            print(op);
+            print(restric);
           }
-          print(offerno);
-          print(op);
-          print(restric);
         }
+        y=1;
       }
+      tot = double.parse(Total.toStringAsFixed(2));
+
       if(int.parse(restric)<=Total){
         if(op == '%'){
-          Total = Total-(int.parse(offerno)*(Total%100));
+          print(int.parse(offerno)*(Total/100));
+          Total = Total-(int.parse(offerno)*(Total/100));
           print(Total);
         }
         if(op == '-'){
@@ -97,33 +110,24 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
         if(op == 'v'){
           extra = 'QR 100 Voucher to be delivered';
         }
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  AlertDialog(
-                    title: Text('Voucher Applied'),
-                    content: Text(
-                        'Current Total = $Total \n $extra'),
-                    actions: [
-                      TextButton(onPressed: () {
-                        Navigator.pop(context);
-                      },
-                          child: Text('Cancel')),
-                    ],
-                  )
-          );
+        if(tot<300){
+          tot+=10;
         }
+      }
     }
 
     if(data['total']!='-1' && data['vouchers']=='v'){
       print('third');
       String total = data['total'];
-      Total = int.parse(total);
+      Total = double.parse(total);
       double pointS = Total/10;
       points = pointS.toInt();
       vouchers = data['vouchers'];
+      tot = double.parse(Total.toStringAsFixed(2));
     }
     print(data['vouchers']);
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -140,10 +144,12 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Total Amount to be Paid: ' ,style: TextStyle(fontSize: 17)),
-                Text(' $Total' ,style: TextStyle(fontSize: 23)),
+                Text(' $tot' ,style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold)),
               ],
             ),
             Text('(with shipping costs)' ,style: TextStyle(fontSize: 12)),
+            SizedBox(height: 20,),
+            Text('Extra :  $extra' ,style: TextStyle(fontSize: 15)),
             SizedBox(height: 20,),
             ElevatedButton(
                 onPressed: (){

@@ -30,7 +30,7 @@ class _VoucherCardState extends State<VoucherCard> {
           children: [
             SizedBox(height: 10,),
             Text(widget.pointlist.description, style: TextStyle( fontSize: 18),),
-
+            SizedBox(height: 10,)
           ],
         ),
       ),

@@ -17,12 +17,13 @@ class _OrderPlacedState extends State<OrderPlaced> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments as Map;
     poInts = data['points'];
-    poInts = poInts.toString();
+    //poInts = poInts.toString();
     var Points = int.parse(poInts);
-    total += Points;
     print(total);
+    //total += Points;
+    //print(total);
     Points = 0;
-    print(data['vouchers']);
+    //print(data['vouchers']);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
@@ -40,7 +41,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   'blgno': '00',
                   'street' : '000',
                   'zone' : '00',
-                  'points' : total.toString(),
+                  'points' : poInts.toString(),
                   'vouchers' : data['vouchers']
                 });
               },

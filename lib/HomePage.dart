@@ -586,6 +586,7 @@ class _homepageState extends State<homepage> {
         actions: [
           IconButton(
               onPressed: (){
+                print(points);
                 Navigator.pushReplacementNamed(context, '/CartScreen',arguments: {
                   'items' : items,
                   'total' : Total.toString(),

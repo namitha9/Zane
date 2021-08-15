@@ -108,6 +108,7 @@ class _CartScreenState extends State<CartScreen> {
                             ElevatedButton(
                               onPressed: (){
                                 print(data['vouchers']);
+                                print(points);
                                 Navigator.pushReplacementNamed(context, '/Confirm', arguments:{
                                   'total' : Total.toString() ,
                                   'name' : data['name'],
@@ -115,7 +116,8 @@ class _CartScreenState extends State<CartScreen> {
                                   'blgno': data['blgno'],
                                   'street' : data['street'],
                                   'zone' : data['zone'],
-                                  'vouchers' : data['vouchers']
+                                  'vouchers' : data['vouchers'],
+                                  'points' : points
                                 });
                               },
                               style: ElevatedButton.styleFrom(

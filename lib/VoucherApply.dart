@@ -53,23 +53,24 @@ class _VoucherApplyState extends State<VoucherApply> {
           //print(curint);
         }
       }
-      i=1;
-    }
+      counter.sort();
+      //print(counter);
 
-    counter.sort();
-    //print(counter);
-
-    for (int t in counter){
-      //print(t);
-      for (PointList instance in pointlist){
-        point = int.parse(instance.point);
-        //print(point);
-        if(t==point){
-          pointList.add(PointList(point : instance.point , description : instance.description, i : instance.i ));
-          break;
+      for (int t in counter){
+        //print(t);
+        for (PointList instance in pointlist){
+          point = int.parse(instance.point);
+          //print(point);
+          if(t==point){
+            pointList.add(PointList(point : instance.point , description : instance.description, i : instance.i ));
+            break;
+          }
         }
       }
+
+      i=1;
     }
+    print(counter);
 
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +86,8 @@ class _VoucherApplyState extends State<VoucherApply> {
                     'blgno': '00',
                     'street' : '000',
                     'zone' : '00',
-                    'vouchers' : count
+                    'vouchers' : count,
+                    'points' : data['totalpoints']
                   });
                 },
                 child: Text('Back to Order', style: TextStyle(color: Colors.white),)
@@ -107,7 +109,8 @@ class _VoucherApplyState extends State<VoucherApply> {
                         VoucherApplyCard(
                       pointlist: e,
                       total : data['total'],
-                      count : count
+                      count : count,
+                            totalpoints : data['totalpoints']
                     )).toList(),
                   ),
                 ],

@@ -7,8 +7,9 @@ class VoucherApplyCard extends StatefulWidget {
   PointList pointlist;
   String total;
   String count;
+  int totalpoints;
 
-  VoucherApplyCard({Key? key, required this.pointlist, required this.total, required this.count})
+  VoucherApplyCard({Key? key, required this.pointlist, required this.total, required this.count, required this.totalpoints})
       : super(key: key);
 
   @override
@@ -56,9 +57,9 @@ class _VoucherApplyCardState extends State<VoucherApplyCard> {
                         newvouch = 'p';
                       }
                     });
-                    print(widget.pointlist.point);
+                    //print(widget.pointlist.point);
                     print(newvouch);
-                    print(Total);
+                    //print(Total);
                     Navigator.pushReplacementNamed(context, '/Confirm',arguments: {
                       'total' : '-1',
                       'name' : Total.toString(),
@@ -66,7 +67,8 @@ class _VoucherApplyCardState extends State<VoucherApplyCard> {
                       'blgno': '00',
                       'street' : '000',
                       'zone' : widget.pointlist.point,
-                      'vouchers' : newvouch
+                      'vouchers' : newvouch,
+                      'points' : widget.totalpoints
                   });
                     },
                   child: Text('Apply >'),

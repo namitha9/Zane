@@ -22,15 +22,17 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
   String extra = 'None';
   int y=0;
   double tot=0;
+  int totalpoints = 0;
+  int totalp = 0;
 
   static List <PointList> pointlist =  [
     PointList(point: '100', description: '5% off on Purchases above QR 200', i: '5%200'),
     PointList(point: '250', description: 'QR 25 off on Purchases above QR 200', i: '25-200') ,
-    PointList(point: '300', description: 'Free Zane Limited Edition Bag', i: 'free,0'),
+    PointList(point: '300', description: 'Free Zane Limited Edition Bag', i: '0,0'),
     PointList(point: '500', description: 'QR 100 Voucher', i: '100v0'),
     PointList(point: '500', description: '25% CashBack on Purchases above QR 250', i: '25%250'),
     PointList(point: '750', description: '35% Off on your Next Purchase', i: '35%0'),
-    PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or More', i: 'free,0'),
+    PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or More', i: '0,0'),
   ];
 
   @override
@@ -57,6 +59,8 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
       street = data['street'];
       zone = data['zone'];
       vouchers = data['vouchers'];
+      totalpoints = data['points'];
+      totalp = totalpoints+points;
       tot = double.parse(Total.toStringAsFixed(2));
       if(tot<300){
         tot+=10;
@@ -72,6 +76,8 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
       points = pointS.toInt();
       Total = (Total>300) ? Total : Total+10;
       vouchers = data['vouchers']=='p' ? '' : data['vouchers'];
+      totalpoints = data['points'];
+      totalp = totalpoints+points;
       if(y==0) {
         for (PointList instance in pointlist) {
           if (instance.point == data['zone']) {
@@ -93,12 +99,13 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
         }
         y=1;
       }
-      tot = double.parse(Total.toStringAsFixed(2));
 
       if(int.parse(restric)<=Total){
         if(op == '%'){
-          print(int.parse(offerno)*(Total/100));
-          Total = Total-(int.parse(offerno)*(Total/100));
+          var pri = int.parse(offerno)*(Total/100);
+          print(pri);
+          print(Total);
+          Total -= pri;
           print(Total);
         }
         if(op == '-'){
@@ -110,10 +117,8 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
         if(op == 'v'){
           extra = 'QR 100 Voucher to be delivered';
         }
-        if(tot<300){
-          tot+=10;
-        }
       }
+      tot = double.parse(Total.toStringAsFixed(2));
     }
 
     if(data['total']!='-1' && data['vouchers']=='v'){
@@ -123,6 +128,8 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
       double pointS = Total/10;
       points = pointS.toInt();
       vouchers = data['vouchers'];
+      totalpoints = data['points'];
+      totalp = totalpoints+points;
       tot = double.parse(Total.toStringAsFixed(2));
     }
     print(data['vouchers']);
@@ -157,8 +164,9 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
                   print(vouchers);
                   Navigator.pushReplacementNamed(context, '/Voucher', arguments: {
                     'count' : vouchers,
-                    'points' : points.toString(),
-                    'total' : Total.toString()
+                    //'points' : points.toString(),
+                    'total' : Total.toString(),
+                    'totalpoints' : totalpoints
                   });
                 },
                 child: Text('Apply Voucher >')),
@@ -187,7 +195,7 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
                       print(points);
                       print(vouchers);
                       Navigator.pushReplacementNamed(context, '/Payment', arguments: {
-                        'points' : points.toString(),
+                        'points' : totalp.toString(),
                         'email' : data['email'],
                         'vouchers' : vouchers
                       });

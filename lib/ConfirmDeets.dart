@@ -166,7 +166,12 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
                     'count' : vouchers,
                     //'points' : points.toString(),
                     'total' : Total.toString(),
-                    'totalpoints' : totalpoints
+                    'totalpoints' : totalpoints,
+                    'name' : data['name'],
+                    'email' : data['email'],
+                    'blgno' : blgno,
+                    'street' : street,
+                    'zone' : zone
                   });
                 },
                 child: Text('Apply Voucher >')),

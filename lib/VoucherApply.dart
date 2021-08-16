@@ -21,19 +21,21 @@ class _VoucherApplyState extends State<VoucherApply> {
     PointList(point: '750', description: '35% Off on your Next Purchase', i: '0'),
     PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or More', i: '0'),
   ];
-  static String count = '';
-  int i =0;
-  var point;
-  //int cat = 0;
-  int b = 0;
-  List <int> counter = [];
-  String current = '';
-  int dog = 0;
-  static List <PointList> pointList = [];
+
 
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments as Map;
+    List <PointList> pointList = [];
+    String count = '';
+    int i =0;
+    var point;
+    //int cat = 0;
+    int b = 0;
+    List <int> counter = [];
+    String current = '';
+    int dog = 0;
+
     if (i==0){
       //poinT = int.parse(data['points']);
       //pointlist = List.from(data['pointlist']);
@@ -81,11 +83,11 @@ class _VoucherApplyState extends State<VoucherApply> {
                   print(count);
                   Navigator.pushReplacementNamed(context,'/Confirm',arguments: {
                     'total' : data['total'],
-                    'name' : 'Name',
-                    'email' : 'Email',
-                    'blgno': '00',
-                    'street' : '000',
-                    'zone' : '00',
+                    'name' : data['name'],
+                    'email' : data['email'],
+                    'blgno': data['blgno'],
+                    'street' : data['street'],
+                    'zone' : data['zone'],
                     'vouchers' : count,
                     'points' : data['totalpoints']
                   });
@@ -110,8 +112,13 @@ class _VoucherApplyState extends State<VoucherApply> {
                       pointlist: e,
                       total : data['total'],
                       count : count,
-                            totalpoints : data['totalpoints']
-                    )).toList(),
+                            totalpoints : data['totalpoints'],
+                          name : data['name'],
+                          email : data['email'],
+                          blgno : data['blgno'],
+                          street : data['street'],
+                          zone : data['zone']
+                        )).toList(),
                   ),
                 ],
               ),

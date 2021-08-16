@@ -8,8 +8,13 @@ class VoucherApplyCard extends StatefulWidget {
   String total;
   String count;
   int totalpoints;
+  String name;
+  String email;
+  String blgno;
+  String street;
+  String zone;
 
-  VoucherApplyCard({Key? key, required this.pointlist, required this.total, required this.count, required this.totalpoints})
+  VoucherApplyCard({Key? key, required this.pointlist, required this.total, required this.count, required this.totalpoints,required this.name, required this.email, required this.blgno, required this.street, required this.zone})
       : super(key: key);
 
   @override
@@ -63,9 +68,9 @@ class _VoucherApplyCardState extends State<VoucherApplyCard> {
                     Navigator.pushReplacementNamed(context, '/Confirm',arguments: {
                       'total' : '-1',
                       'name' : Total.toString(),
-                      'email' : 'Email',
-                      'blgno': '00',
-                      'street' : '000',
+                      'email' : widget.email,
+                      'blgno': widget.blgno,
+                      'street' : widget.street,
                       'zone' : widget.pointlist.point,
                       'vouchers' : newvouch,
                       'points' : widget.totalpoints

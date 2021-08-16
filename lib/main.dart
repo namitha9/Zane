@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:zane_shop/CartScreen.dart';
 import 'package:zane_shop/ConfirmDeets.dart';
+import 'package:zane_shop/Login.dart';
 import 'package:zane_shop/ProductDisplay.dart';
 import 'package:zane_shop/ProductList.dart';
 import 'package:zane_shop/VouchersClaimed.dart';
 import 'LoadingPage.dart';
+import 'Login.dart';
+import 'SignUp.dart';
 import 'HomePage.dart';
 import 'ProductDisplay.dart';
 import 'CartScreen.dart';
@@ -23,6 +26,8 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => loading(),
+      '/Login' : (context) => Login(),
+      '/SignUp' :(context) => SignUp(),
       '/HomePage' : (context) => homepage(),
       '/ProductDisplay' : (context) => ProductDisplay(),
       '/CartScreen' :(context) => CartScreen(),

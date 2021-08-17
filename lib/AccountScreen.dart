@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'PointList.dart';
+import 'Users.dart';
 
 class AccountScreen extends StatefulWidget {
   final String total;
@@ -10,7 +11,8 @@ class AccountScreen extends StatefulWidget {
   final String street;
   final String zone;
   final String count;
-  const AccountScreen({Key? key, required this.total, required this.name, required this.email, required this.blgno, required this.street, required this.zone, required this.count}) : super(key: key);
+  final List <UserProfile> users;
+  const AccountScreen({Key? key, required this.total, required this.name, required this.email, required this.blgno, required this.street, required this.zone, required this.count, required this.users}) : super(key: key);
 
   @override
   _AccountScreenState createState() => _AccountScreenState();
@@ -40,9 +42,7 @@ class _AccountScreenState extends State<AccountScreen> {
         color: Colors.grey[300],
         child: Column(
           children: [
-            TextButton(
-              onPressed: (){},
-              child: Padding(
+            Padding(
                 padding: const EdgeInsets.all(20),
                 child: Center(
                   child: Column(
@@ -140,11 +140,24 @@ class _AccountScreenState extends State<AccountScreen> {
                           ],
                         ),
                       ),
+                      TextButton(
+                          onPressed: (){
+                            Navigator.pushReplacementNamed(context, '/Login', arguments: {
+                          'name' : 'Name',
+                          'email' : 'Email',
+                          'password' : 'Password',
+                          'blgno': '00',
+                          'street' : '000',
+                          'zone' : '00',
+                          'vouchers' : 'p',
+                              'users' : widget.users
+                        });
+                        },
+                          child: Text('Sign Out'))
                     ],
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),

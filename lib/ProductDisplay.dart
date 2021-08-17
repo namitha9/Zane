@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Users.dart';
 
 class ProductDisplay extends StatefulWidget {
   const ProductDisplay({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class _ProductDisplayState extends State<ProductDisplay> {
     data = ModalRoute.of(context)!.settings.arguments as Map;
     int price = data['price'];
     var points = int.parse(data['points']);
+    List <UserProfile> users = [];
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.grey[850],
@@ -42,7 +44,8 @@ class _ProductDisplayState extends State<ProductDisplay> {
                   'street' : '000',
                   'zone' : '00',
                   'points' : points.toString(),
-                  'vouchers' : data['vouchers']
+                  'vouchers' : data['vouchers'],
+                  'users' : users
                 });
               },
               child: Text('Back to Home',style: TextStyle(color: Colors.white),)

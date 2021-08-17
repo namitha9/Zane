@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Users.dart';
 
 class ProductSelect extends StatefulWidget {
   const ProductSelect({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _ProductSelectState extends State<ProductSelect> {
   String picture = 'p';
   String size = 's';
   String counter = 'c';
+  List <UserProfile> users = [];
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,8 @@ class _ProductSelectState extends State<ProductSelect> {
                           'street' : '000',
                           'zone' : '00',
                           'points' : points.toString(),
-                          'vouchers' : data['vouchers']
+                          'vouchers' : data['vouchers'],
+                          'users' : users
                         });
                       },
                       child: Text('Confirm Item', style: TextStyle(color: Colors.white),),
@@ -115,7 +118,8 @@ class _ProductSelectState extends State<ProductSelect> {
                         'street' : '000',
                         'zone' : '00',
                         'points' : points.toString(),
-                        'vouchers' : data['vouchers']
+                        'vouchers' : data['vouchers'],
+                        'users' : users
                       });
                     },
                     child: Text('Change Item', style: TextStyle(color: Colors.white),),

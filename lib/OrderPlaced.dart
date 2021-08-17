@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Users.dart';
 
 class OrderPlaced extends StatefulWidget {
   const OrderPlaced({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
   Map data={};
   String poInts = '';
   static int total = 0 ;
+  List <UserProfile> users = [];
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,8 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   'street' : '000',
                   'zone' : '00',
                   'points' : poInts.toString(),
-                  'vouchers' : data['vouchers']
+                  'vouchers' : data['vouchers'],
+                  'users' : users
                 });
               },
               child: Text('Back to Home',style: TextStyle(color: Colors.white),)

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Users.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _CartScreenState extends State<CartScreen> {
   String size = 's';
   String counter = 'c';
   String delete = 'no';
+  List <UserProfile> users = [];
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +44,14 @@ class _CartScreenState extends State<CartScreen> {
                   'size' : 's',
                   'counter' : 'c',
                   'delete' : 'no',
-                  'name' : 'Name',
-                  'email' : 'Email',
-                  'blgno': '00',
-                  'street' : '000',
-                  'zone' : '00',
+                  'name' : data['name'],
+                  'email' : data['email'],
+                  'blgno': data['blgno'],
+                  'street' : data['street'],
+                  'zone' : data['zone'],
                   'points' : points.toString(),
-                  'vouchers' : data['vouchers']
+                  'vouchers' : data['vouchers'],
+                  'users' : users
                 });
               },
               child: Text('Back to Home', style: TextStyle(color: Colors.white),)

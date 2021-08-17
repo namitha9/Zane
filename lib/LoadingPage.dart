@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Users.dart';
 
 class loading extends StatefulWidget {
   const loading({Key? key}) : super(key: key);
@@ -9,9 +10,20 @@ class loading extends StatefulWidget {
 
 class _loadingState extends State<loading> {
 
+  List <UserProfile> users = [];
+
   void loadin() async{
     await Future.delayed(Duration(seconds: 2),(){
-      return Navigator.pushNamed(context, '/Login');
+      return Navigator.pushReplacementNamed(context, '/Login', arguments: {
+        'name' : 'Name',
+        'email' : 'Email',
+        'password' : 'Password',
+        'blgno': '00',
+        'street' : '000',
+        'zone' : '00',
+        'vouchers' : 'p',
+        'users' : users
+      });
     });
   }
 
@@ -29,7 +41,16 @@ class _loadingState extends State<loading> {
           padding: EdgeInsets.fromLTRB(20, 100, 20, 0),
           child: TextButton(
             onPressed: (){
-              Navigator.pushNamed(context, '/Login');
+              Navigator.pushReplacementNamed(context, '/Login',arguments: {
+                'name' : 'Name',
+                'email' : 'Email',
+                'password' : 'Password',
+                'blgno': '00',
+                'street' : '000',
+                'zone' : '00',
+                'vouchers' : 'p',
+                'users' : users
+              });
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

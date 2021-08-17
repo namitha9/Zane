@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'Users.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController street = TextEditingController();
   TextEditingController zone = TextEditingController();
   Map data = {};
+  List <UserProfile> users = [];
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +135,8 @@ class _EditProfileState extends State<EditProfile> {
                           'street' : street.text=='' ? data['street'] : street.text,
                           'zone' : zone.text=='' ? data['zone'] : zone.text,
                           'points' : data['points'],
-                          'vouchers' : 'p'
+                          'vouchers' : 'p',
+                          'users' : users
                         });
                       },
                       child: Text('Update Info')
@@ -152,7 +155,8 @@ class _EditProfileState extends State<EditProfile> {
                           'street' : data['street'],
                           'zone' : data['zone'],
                           'points' : data['points'],
-                          'vouchers' : 'p'
+                          'vouchers' : 'p',
+                          'users' : users
                         });
                         },
                       child: Text('Cancel')

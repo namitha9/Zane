@@ -5,6 +5,7 @@ import 'HomeScreen.dart';
 import 'SearchScreen.dart';
 import 'AccountScreen.dart';
 import 'Item.dart';
+import 'Users.dart';
 
 class homepage extends StatefulWidget {
   const homepage({Key? key}) : super(key: key);
@@ -44,6 +45,7 @@ class _homepageState extends State<homepage> {
   static String street = '000';
   static String zone = '00';
   static int now = 0;
+  List <UserProfile> users = [];
 
   String count = '';
   String vouchers = '';
@@ -84,7 +86,7 @@ class _homepageState extends State<homepage> {
     else {
       detailschange();
       print(count);
-      return AccountScreen( total :points, name: name, email : email, blgno : blgno, street: street, zone : zone, count : count);
+      return AccountScreen( total :points, name: name, email : email, blgno : blgno, street: street, zone : zone, count : count, users : users);
     }
   }
 
@@ -579,6 +581,9 @@ class _homepageState extends State<homepage> {
     if (data['vouchers']!='p'){
       count = data['vouchers'];
       print(count);
+    }
+    if(data['users']!=[]){
+      users = List.from(data['users']);
     }
     return Scaffold(
       appBar: AppBar(

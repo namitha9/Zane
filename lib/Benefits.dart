@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'PointList.dart';
+import 'Users.dart';
 
 class Benefits extends StatefulWidget {
   const Benefits({Key? key}) : super(key: key);
@@ -23,6 +24,8 @@ class _BenefitsState extends State<Benefits> {
     PointList(point: '750', description: '35% Off on your Next Purchase', i: '0'),
     PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or more', i: '0')
   ];
+
+  List <UserProfile> users = [];
 
   String count = '';
 
@@ -102,6 +105,7 @@ class _BenefitsState extends State<Benefits> {
                     'zone' : '00',
                     'points' : poinT.toString(),
                     'vouchers' : count,
+                    'users' : users
                   });
                 },
                 child: Text('Back to Home', style: TextStyle(color: Colors.white),)

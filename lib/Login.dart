@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Users.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -9,15 +10,71 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
+  Map data = {};
+
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
-  void passcheck() {
-    //do later
-  }
+  List <UserProfile> users = [];
+  List <UserProfile> usersc = [];
+
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
+
+    data = ModalRoute.of(context)!.settings.arguments as Map;
+
+    if(data['name']!='Name'){
+      users.add(UserProfile(username: data['name'],email: data['email'], password: data['password'], blgno: data['blgno'], street: data['street'], zone: data['zone'], voucher: 'p'));
+    }
+
+    void passcheck() {
+      print('2');
+      for (UserProfile instance in users){
+        print('3');
+        print(instance);
+        if(email.text==instance.email && password.text==instance.password){
+          print('4');
+          Navigator.pushReplacementNamed(context, '/HomePage', arguments: {
+            'picture' : 'p',
+            'price' : 'p',
+            'size' : 's',
+            'counter' : 'c',
+            'delete' : 'no',
+            'name' : instance.username,
+            'email' : instance.email,
+            'blgno': instance.blgno,
+            'street' : instance.street,
+            'zone' : instance.zone,
+            'points' : '0',
+            'vouchers' : 'p',
+            'users' : users
+          });
+        }
+        else{
+          showDialog(
+              context: context,
+              builder: (BuildContext context) =>
+                  AlertDialog(
+                    title: Text('Incorrect Information'),
+                    content: Text(
+                        'You have entered the wrong email or password.'),
+                    actions: [
+                      TextButton(onPressed: () {Navigator.pop(context);},
+                          child: Text('Back')),
+                    ],
+                  )
+          );
+        }
+      }
+    }
+
+    usersc = List.from(data['users']);
+    if(usersc.elementAt(0).username!='Name'){
+      users = List.from(usersc);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
@@ -55,7 +112,18 @@ class _LoginState extends State<Login> {
                   SizedBox(height: 4,),
                   TextFormField(
                     controller: password,
+                    obscureText: _isObscure,
                     decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                              _isObscure ? Icons.visibility_off : Icons.visibility),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                          color: Colors.black,
+                        ),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(),
                         )
@@ -71,20 +139,8 @@ class _LoginState extends State<Login> {
                     children: [
                       ElevatedButton(
                           onPressed: (){
-                            Navigator.pushReplacementNamed(context, '/HomePage', arguments: {
-                              'picture' : 'p',
-                              'price' : 'p',
-                              'size' : 's',
-                              'counter' : 'c',
-                              'delete' : 'no',
-                              'name' : 'Name',
-                              'email' : 'Email',
-                              'blgno': '00',
-                              'street' : '000',
-                              'zone' : '00',
-                              'points' : '0',
-                              'vouchers' : 'p'
-                            });
+                            print('1');
+                            passcheck();
                           },
                           child: Text('LOGIN'),
                         style: ElevatedButton.styleFrom(primary: Colors.grey[500]),

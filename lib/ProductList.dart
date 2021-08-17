@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Item.dart';
+import 'Users.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _ProductListState extends State<ProductList> {
   int catindex = 0;
   List <TotalItem> totalItems = [];
   String points = '';
+  List <UserProfile> users =[];
 
   Widget display(catindex){
     TotalItem instance = totalItems[catindex];
@@ -74,7 +76,8 @@ class _ProductListState extends State<ProductList> {
                   'street' : '000',
                   'zone' : '00',
                   'points' : data['points'],
-                  'vouchers' : 'p'
+                  'vouchers' : 'p',
+                  'users' : users
                 });
               },
               child: Text('Back to Home', style: TextStyle(color: Colors.white),)

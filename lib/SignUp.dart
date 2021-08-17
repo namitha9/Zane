@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Users.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -17,6 +18,9 @@ class _SignUpState extends State<SignUp> {
   TextEditingController zone = TextEditingController();
 
   bool _isObscure = true;
+
+  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
+  //UserProfile user = UserProfile(username: '', password: '', blgno: '', street: '', zone: '', voucher: '');
 
   @override
   Widget build(BuildContext context) {
@@ -128,19 +132,15 @@ class _SignUpState extends State<SignUp> {
                       children: [
                         ElevatedButton(
                           onPressed: (){
-                            Navigator.pushReplacementNamed(context, '/HomePage', arguments: {
-                              'picture' : 'p',
-                              'price' : 'p',
-                              'size' : 's',
-                              'counter' : 'c',
-                              'delete' : 'no',
-                              'name' : name.text=='' ? 'Name' : name.text,
-                              'email' : email.text=='' ? 'Email' : email.text,
-                              'blgno': blgno.text=='' ? '00' : blgno.text,
-                              'street' : street.text=='' ? '000' : street.text,
-                              'zone' : zone.text=='' ? '00' : zone.text,
-                              'points' : '0',
-                              'vouchers' : 'p'
+                            Navigator.pushReplacementNamed(context, '/Login', arguments: {
+                              'name' : name.text,
+                              'email' : email.text,
+                              'password' : password.text,
+                              'blgno': blgno.text,
+                              'street' : street.text,
+                              'zone' : zone.text,
+                              'vouchers' : 'p',
+                              'users' : users
                             });
                           },
                           child: Text('SIGN UP'),

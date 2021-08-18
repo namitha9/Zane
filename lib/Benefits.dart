@@ -25,7 +25,7 @@ class _BenefitsState extends State<Benefits> {
     PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or more', i: '0')
   ];
 
-  List <UserProfile> users = [];
+  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
 
   String count = '';
 

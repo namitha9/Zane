@@ -24,7 +24,7 @@ class _ProductDisplayState extends State<ProductDisplay> {
     data = ModalRoute.of(context)!.settings.arguments as Map;
     int price = data['price'];
     var points = int.parse(data['points']);
-    List <UserProfile> users = [];
+    List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.grey[850],

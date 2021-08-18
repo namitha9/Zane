@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'VoucherCard.dart';
 import 'PointList.dart';
+import 'Users.dart';
 
 class VoucherClaimed extends StatefulWidget {
   const VoucherClaimed({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _VoucherClaimedState extends State<VoucherClaimed> {
     PointList(point: '750', description: '35% Off on your Next Purchase', i: '0'),
     PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or More', i: '0'),
   ];
+  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
   static String count = '';
   int i =0;
   var point;
@@ -90,7 +92,8 @@ class _VoucherClaimedState extends State<VoucherClaimed> {
                     'street' : '000',
                     'zone' : '00',
                     'points' : data['points'],
-                    'vouchers' : count
+                    'vouchers' : count,
+                    'users' : users
                   });
                 },
                 child: Text('Back to Home', style: TextStyle(color: Colors.white),)

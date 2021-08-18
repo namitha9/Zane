@@ -17,7 +17,7 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController street = TextEditingController();
   TextEditingController zone = TextEditingController();
   Map data = {};
-  List <UserProfile> users = [];
+  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
 
   @override
   Widget build(BuildContext context) {

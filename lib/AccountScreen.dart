@@ -29,6 +29,8 @@ class _AccountScreenState extends State<AccountScreen> {
     PointList(point: '750', description: '35% Off on your Next Purchase', i: '0'),
     PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or More', i: '0'),
   ];
+  List <UserProfile> usersc = [];
+  List <UserProfile> usersm = [];
 
   @override
   Widget build(BuildContext context) {

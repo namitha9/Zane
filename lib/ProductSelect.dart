@@ -15,7 +15,6 @@ class _ProductSelectState extends State<ProductSelect> {
   String picture = 'p';
   String size = 's';
   String counter = 'c';
-  List <UserProfile> users = [];
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +26,7 @@ class _ProductSelectState extends State<ProductSelect> {
     var points = int.parse(data['points']);
     var priCe = int.parse(price);
     var couNter = int.parse(counter);
+    List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
     total = priCe*couNter;
     print(data);
     return Scaffold(

@@ -18,6 +18,30 @@ class _SignUpState extends State<SignUp> {
   TextEditingController zone = TextEditingController();
 
   bool _isObscure = true;
+  int i = 0;
+  String passcheck = '';
+
+  void validatePassword(String password){
+    String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$&*~]).{8,}$';
+    RegExp exp = new RegExp(pattern);
+    if(password.isEmpty){
+      setState(() {
+        passcheck = 'Enter password';
+      });
+    }
+    else if(!exp.hasMatch(password)){
+      setState(() {
+        passcheck = 'Enter valid password';
+      });
+    }
+    else{
+      setState(() {
+        i = 1;
+        passcheck = ' ';
+      });
+    }
+  }
+
 
   List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
   //UserProfile user = UserProfile(username: '', password: '', blgno: '', street: '', zone: '', voucher: '');
@@ -34,7 +58,7 @@ class _SignUpState extends State<SignUp> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 70,),
+                SizedBox(height: 30,),
                 Image.asset(
                   'assets/images/zane.png',
                   height: 100,
@@ -61,6 +85,7 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 4,),
                     TextFormField(
                       controller: email,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           hintText: 'Email',
                           border: OutlineInputBorder(
@@ -75,6 +100,7 @@ class _SignUpState extends State<SignUp> {
                       controller: password,
                       obscureText: _isObscure,
                       decoration: InputDecoration(
+                        errorText: passcheck,
                           suffixIcon: IconButton(
                             icon: Icon(
                                 _isObscure ? Icons.visibility_off : Icons.visibility),
@@ -90,11 +116,13 @@ class _SignUpState extends State<SignUp> {
                           )
                       ),
                     ),
+                    //Text(passcheck, style: TextStyle(fontSize: 13),),
                     SizedBox(height: 20,),
                     Text('BUILDING NUMBER', style: TextStyle(letterSpacing: 6, fontSize: 13),),
                     SizedBox(height: 4,),
                     TextFormField(
                       controller: blgno,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           hintText: '00',
                           border: OutlineInputBorder(
@@ -107,6 +135,7 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 4,),
                     TextFormField(
                       controller: street,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           hintText: '000',
                           border: OutlineInputBorder(
@@ -119,6 +148,7 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 4,),
                     TextFormField(
                       controller: zone,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         hintText: '00',
                           border: OutlineInputBorder(
@@ -132,16 +162,22 @@ class _SignUpState extends State<SignUp> {
                       children: [
                         ElevatedButton(
                           onPressed: (){
-                            Navigator.pushReplacementNamed(context, '/Login', arguments: {
-                              'name' : name.text,
-                              'email' : email.text,
-                              'password' : password.text,
-                              'blgno': blgno.text,
-                              'street' : street.text,
-                              'zone' : zone.text,
-                              'vouchers' : 'p',
-                              'users' : users
+                            setState(() {
+                              validatePassword(password.text);
                             });
+                            //validatePassword(password.text);
+                            if(i==1){
+                              Navigator.pushReplacementNamed(context, '/Login', arguments: {
+                                'name' : name.text,
+                                'email' : email.text,
+                                'password' : password.text,
+                                'blgno': blgno.text,
+                                'street' : street.text,
+                                'zone' : zone.text,
+                                'vouchers' : 'p',
+                                'users' : users
+                              });
+                            }
                           },
                           child: Text('SIGN UP'),
                           style: ElevatedButton.styleFrom(primary: Colors.grey[500]),

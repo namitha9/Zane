@@ -10,7 +10,7 @@ class loading extends StatefulWidget {
 
 class _loadingState extends State<loading> {
 
-  List <UserProfile> users = [];
+  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
 
   void loadin() async{
     await Future.delayed(Duration(seconds: 2),(){

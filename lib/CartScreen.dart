@@ -18,7 +18,7 @@ class _CartScreenState extends State<CartScreen> {
   String size = 's';
   String counter = 'c';
   String delete = 'no';
-  List <UserProfile> users = [];
+  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
 
   @override
   Widget build(BuildContext context) {

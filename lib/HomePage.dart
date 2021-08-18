@@ -45,7 +45,8 @@ class _homepageState extends State<homepage> {
   static String street = '000';
   static String zone = '00';
   static int now = 0;
-  List <UserProfile> users = [];
+  List <UserProfile> usersc = [];
+  static List <UserProfile> users = [];
 
   String count = '';
   String vouchers = '';
@@ -85,7 +86,7 @@ class _homepageState extends State<homepage> {
     }
     else {
       detailschange();
-      print(count);
+      print(users);
       return AccountScreen( total :points, name: name, email : email, blgno : blgno, street: street, zone : zone, count : count, users : users);
     }
   }
@@ -582,8 +583,9 @@ class _homepageState extends State<homepage> {
       count = data['vouchers'];
       print(count);
     }
-    if(data['users']!=[]){
-      users = List.from(data['users']);
+    usersc = List.from(data['users']);
+    if(usersc.elementAt(0).username!='Name'){
+      users = List.from(usersc);
     }
     return Scaffold(
       appBar: AppBar(

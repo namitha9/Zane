@@ -15,7 +15,7 @@ class _ProductListState extends State<ProductList> {
   int catindex = 0;
   List <TotalItem> totalItems = [];
   String points = '';
-  List <UserProfile> users =[];
+  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
 
   Widget display(catindex){
     TotalItem instance = totalItems[catindex];
@@ -37,8 +37,8 @@ class _ProductListState extends State<ProductList> {
           children: [
             Image(
               image: NetworkImage(instance.picture),
-              height: 180,
-              width: 180,
+              height: 165,
+              width: 165,
             ),
             SizedBox(
                 height: 10

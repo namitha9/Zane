@@ -15,7 +15,7 @@ class _ProductListState extends State<ProductList> {
   int catindex = 0;
   List <TotalItem> totalItems = [];
   String points = '';
-  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
+  List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', points: '0', voucher: 'p')];
 
   Widget display(catindex){
     TotalItem instance = totalItems[catindex];
@@ -37,8 +37,8 @@ class _ProductListState extends State<ProductList> {
           children: [
             Image(
               image: NetworkImage(instance.picture),
-              height: 165,
-              width: 165,
+              height: 175,
+              width: 175,
             ),
             SizedBox(
                 height: 10
@@ -61,6 +61,7 @@ class _ProductListState extends State<ProductList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
+        leading: Container(),
         actions: [
           TextButton(
               onPressed: (){
@@ -77,7 +78,8 @@ class _ProductListState extends State<ProductList> {
                   'zone' : '00',
                   'points' : data['points'],
                   'vouchers' : 'p',
-                  'users' : users
+                  'users' : users,
+                  'id' : '00'
                 });
               },
               child: Text('Back to Home', style: TextStyle(color: Colors.white),)

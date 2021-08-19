@@ -13,7 +13,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
   Map data={};
   String poInts = '';
   static int total = 0 ;
-  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
+  List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', points: '0', voucher: 'p')];
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
+        leading: Container(),
         actions: [
           TextButton(
               onPressed: (){
@@ -45,7 +46,8 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   'zone' : '00',
                   'points' : poInts.toString(),
                   'vouchers' : data['vouchers'],
-                  'users' : users
+                  'users' : users,
+                  'id' : '00'
                 });
               },
               child: Text('Back to Home',style: TextStyle(color: Colors.white),)

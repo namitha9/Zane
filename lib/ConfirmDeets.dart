@@ -139,6 +139,7 @@ class _ConfirmDeetsState extends State<ConfirmDeets> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
+        leading: Container(),
       ),
       body: Padding(
         padding: EdgeInsets.all(20),

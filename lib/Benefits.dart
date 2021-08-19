@@ -25,7 +25,7 @@ class _BenefitsState extends State<Benefits> {
     PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or more', i: '0')
   ];
 
-  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
+  List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', points: '0', voucher: 'p')];
 
   String count = '';
 
@@ -89,6 +89,7 @@ class _BenefitsState extends State<Benefits> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
+          leading: Container (),
           actions: [
             TextButton(
                 onPressed: (){
@@ -105,7 +106,8 @@ class _BenefitsState extends State<Benefits> {
                     'zone' : '00',
                     'points' : poinT.toString(),
                     'vouchers' : count,
-                    'users' : users
+                    'users' : users,
+                    'id' : '00'
                   });
                 },
                 child: Text('Back to Home', style: TextStyle(color: Colors.white),)

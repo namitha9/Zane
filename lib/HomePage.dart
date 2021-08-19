@@ -45,6 +45,7 @@ class _homepageState extends State<homepage> {
   static String street = '000';
   static String zone = '00';
   static int now = 0;
+  static String id = '00';
   List <UserProfile> usersc = [];
   static List <UserProfile> users = [];
 
@@ -67,7 +68,9 @@ class _homepageState extends State<homepage> {
      if (data['zone'] != '00'){
        zone = data['zone'];
      }
-
+     if(data['id']!='00'){
+       id = data['id'];
+     }
    }
 
 
@@ -78,6 +81,7 @@ class _homepageState extends State<homepage> {
   }
 
   Widget openpage() {
+     detailschange();
     if (selectindex == 0) {
       return HomeScreen(menswear: menswear(), womenswear:womenswear());
     }
@@ -85,9 +89,9 @@ class _homepageState extends State<homepage> {
       return SearchScreen(totalitems: totalitems , points : points);
     }
     else {
-      detailschange();
+      //detailschange();
       print(users);
-      return AccountScreen( total :points, name: name, email : email, blgno : blgno, street: street, zone : zone, count : count, users : users);
+      return AccountScreen( total :points, name: name, email : email, blgno : blgno, street: street, zone : zone, count : count, users : users, id: id);
     }
   }
 
@@ -96,6 +100,7 @@ class _homepageState extends State<homepage> {
     String price = instance.price.toString();
     return TextButton(
       onPressed: (){
+        detailschange();
         Navigator.pushReplacementNamed(context, '/ProductDisplay',arguments: {
           'picture': instance.picture ,
           'price' : instance.price,
@@ -296,6 +301,7 @@ class _homepageState extends State<homepage> {
                   Text('Most Loved Styles'),
                   TextButton(
                       onPressed: (){
+                        detailschange();
                         Navigator.pushReplacementNamed(context, '/List',arguments: {
                           'totalitems' : totalitems,
                           'points' : points,
@@ -529,7 +535,9 @@ class _homepageState extends State<homepage> {
                 children: [
                   Text('Most Loved Styles'),
                   TextButton(
-                      onPressed: (){Navigator.pushReplacementNamed(context, '/List',arguments: {'totalitems' : totalitems,'points': points, 'vouchers' : count});},
+                      onPressed: (){
+                        detailschange();
+                        Navigator.pushReplacementNamed(context, '/List',arguments: {'totalitems' : totalitems,'points': points, 'vouchers' : count});},
                       child: Text('More >')
                   )
                 ],
@@ -590,10 +598,12 @@ class _homepageState extends State<homepage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
+        leading: Container(),
         actions: [
           IconButton(
               onPressed: (){
-                print(points);
+                detailschange();
+                print(name);
                 Navigator.pushReplacementNamed(context, '/CartScreen',arguments: {
                   'items' : items,
                   'total' : Total.toString(),
@@ -603,7 +613,8 @@ class _homepageState extends State<homepage> {
                   'street' : street,
                   'zone' : zone,
                   'points' : points.toString(),
-                  'vouchers' : count
+                  'vouchers' : count,
+                  'id' : id
                 });
               },
               icon: Icon(Icons.shopping_cart_outlined)

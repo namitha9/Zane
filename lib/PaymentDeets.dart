@@ -139,6 +139,7 @@ class _PaymentDeetsState extends State<PaymentDeets> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
+        leading: Container(),
       ),
       body: Center(
         child: Padding(

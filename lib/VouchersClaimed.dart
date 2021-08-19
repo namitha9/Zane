@@ -22,7 +22,7 @@ class _VoucherClaimedState extends State<VoucherClaimed> {
     PointList(point: '750', description: '35% Off on your Next Purchase', i: '0'),
     PointList(point: '1000', description: 'Free Zane Goodie Box Worth QR 300 or More', i: '0'),
   ];
-  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
+  List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', points: '0', voucher: 'p')];
   static String count = '';
   int i =0;
   var point;
@@ -31,11 +31,11 @@ class _VoucherClaimedState extends State<VoucherClaimed> {
   List <int> counter = [];
   String current = '';
   int dog = 0;
-  static List <PointList> pointList = [];
 
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments as Map;
+    List <PointList> pointList = [];
     count = data['count'];
     if (i==0){
       //poinT = int.parse(data['points']);
@@ -76,6 +76,7 @@ class _VoucherClaimedState extends State<VoucherClaimed> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.grey[850],
+          leading: Container(),
           actions: [
             TextButton(
                 onPressed: (){
@@ -93,7 +94,8 @@ class _VoucherClaimedState extends State<VoucherClaimed> {
                     'zone' : '00',
                     'points' : data['points'],
                     'vouchers' : count,
-                    'users' : users
+                    'users' : users,
+                    'id' : '00'
                   });
                 },
                 child: Text('Back to Home', style: TextStyle(color: Colors.white),)

@@ -18,7 +18,7 @@ class _CartScreenState extends State<CartScreen> {
   String size = 's';
   String counter = 'c';
   String delete = 'no';
-  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
+  List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00',points: '0', voucher: 'p')];
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,7 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
+          leading: Container(),
           actions: [
             TextButton(
               onPressed: (){
@@ -51,7 +52,8 @@ class _CartScreenState extends State<CartScreen> {
                   'zone' : data['zone'],
                   'points' : points.toString(),
                   'vouchers' : data['vouchers'],
-                  'users' : users
+                  'users' : users,
+                  'id' : data['id']
                 });
               },
               child: Text('Back to Home', style: TextStyle(color: Colors.white),)

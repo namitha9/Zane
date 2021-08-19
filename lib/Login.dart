@@ -26,8 +26,13 @@ class _LoginState extends State<Login> {
     data = ModalRoute.of(context)!.settings.arguments as Map;
 
     if(data['name']!='Name'){
-      users.add(UserProfile(username: data['name'],email: data['email'], password: data['password'], blgno: data['blgno'], street: data['street'], zone: data['zone'], voucher: 'p'));
+      print('not name');
+      int k = users.length;
+      k++;
+      String f = k.toString();
+      users.add(UserProfile(id: f, username: data['name'],email: data['email'], password: data['password'], blgno: data['blgno'], street: data['street'], zone: data['zone'], points: data['points'], voucher: data['vouchers']));
     }
+    print(data['points']);
 
     void passcheck() {
       print('2');
@@ -36,6 +41,8 @@ class _LoginState extends State<Login> {
         print(instance);
         if(email.text==instance.email && password.text==instance.password){
           print('4');
+          print(instance.username);
+          print(instance.points);
           Navigator.pushReplacementNamed(context, '/HomePage', arguments: {
             'picture' : 'p',
             'price' : 'p',
@@ -47,9 +54,10 @@ class _LoginState extends State<Login> {
             'blgno': instance.blgno,
             'street' : instance.street,
             'zone' : instance.zone,
-            'points' : '0',
-            'vouchers' : 'p',
-            'users' : users
+            'points' : instance.points,
+            'vouchers' : instance.voucher,
+            'users' : users,
+            'id' : instance.id
           });
         }
         else{
@@ -70,6 +78,7 @@ class _LoginState extends State<Login> {
       }
     }
 
+    print('copying list');
     usersc = List.from(data['users']);
     if(usersc.elementAt(0).username!='Name'){
       users = List.from(usersc);
@@ -102,6 +111,7 @@ class _LoginState extends State<Login> {
                     TextFormField(
                       controller: email,
                       keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         hintText: 'Email',
                         border: OutlineInputBorder(
@@ -115,6 +125,7 @@ class _LoginState extends State<Login> {
                     TextFormField(
                       controller: password,
                       obscureText: _isObscure,
+                      textInputAction: TextInputAction.go,
                       decoration: InputDecoration(
                           suffixIcon: IconButton(
                             icon: Icon(

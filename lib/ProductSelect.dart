@@ -26,12 +26,13 @@ class _ProductSelectState extends State<ProductSelect> {
     var points = int.parse(data['points']);
     var priCe = int.parse(price);
     var couNter = int.parse(counter);
-    List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
+    List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', points: '0', voucher: 'p')];
     total = priCe*couNter;
     print(data);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[850],
+        leading: Container(),
         actions: [
 
         ],
@@ -98,7 +99,8 @@ class _ProductSelectState extends State<ProductSelect> {
                           'zone' : '00',
                           'points' : points.toString(),
                           'vouchers' : data['vouchers'],
-                          'users' : users
+                          'users' : users,
+                          'id' : '00'
                         });
                       },
                       child: Text('Confirm Item', style: TextStyle(color: Colors.white),),
@@ -119,7 +121,8 @@ class _ProductSelectState extends State<ProductSelect> {
                         'zone' : '00',
                         'points' : points.toString(),
                         'vouchers' : data['vouchers'],
-                        'users' : users
+                        'users' : users,
+                        'id' : '00'
                       });
                     },
                     child: Text('Change Item', style: TextStyle(color: Colors.white),),

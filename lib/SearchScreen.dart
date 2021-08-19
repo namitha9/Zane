@@ -25,16 +25,16 @@ class _SearchScreenState extends State<SearchScreen> {
       for (TotalItem instance in totalitemS) {
         //print(instance);
         cat = List.from(instance.categories);
-        print(cat);
+        //print(cat);
         for (String f in cat) {
-          print(f);
+          //print(f);
           if (f == searchitem.text) {
             print('yes');
             totalItems.add(TotalItem(picture: instance.picture,
                 price: instance.price,
                 description: instance.description,
                 categories: instance.categories));
-            print(totalItems[index].price);
+            //print(totalItems[index].price);
             index += 1;
             break;
           }
@@ -44,7 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
     Widget itemsearch() {
-      additems;
+      //additems;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,

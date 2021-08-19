@@ -43,7 +43,7 @@ class _SignUpState extends State<SignUp> {
   }
 
 
-  List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
+  List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', points: '0', voucher: 'p')];
   //UserProfile user = UserProfile(username: '', password: '', blgno: '', street: '', zone: '', voucher: '');
 
   @override
@@ -73,6 +73,8 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 4,),
                     TextFormField(
                       controller: name,
+                      keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           hintText: 'Name',
                           border: OutlineInputBorder(
@@ -86,6 +88,7 @@ class _SignUpState extends State<SignUp> {
                     TextFormField(
                       controller: email,
                       keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           hintText: 'Email',
                           border: OutlineInputBorder(
@@ -99,6 +102,7 @@ class _SignUpState extends State<SignUp> {
                     TextFormField(
                       controller: password,
                       obscureText: _isObscure,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         errorText: passcheck,
                           suffixIcon: IconButton(
@@ -136,6 +140,7 @@ class _SignUpState extends State<SignUp> {
                     TextFormField(
                       controller: street,
                       keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           hintText: '000',
                           border: OutlineInputBorder(
@@ -175,6 +180,7 @@ class _SignUpState extends State<SignUp> {
                                 'street' : street.text,
                                 'zone' : zone.text,
                                 'vouchers' : 'p',
+                                'points' : '0',
                                 'users' : users
                               });
                             }

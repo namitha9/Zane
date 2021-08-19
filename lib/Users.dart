@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class UserProfile {
 
+  String id;
   String username;
   String email;
   String password;
@@ -9,7 +10,8 @@ class UserProfile {
   String street;
   String zone;
   String voucher;
+  String points;
 
-  UserProfile({required this.username,required this.email, required this.password, required this.blgno, required this.street, required this.zone,required this.voucher});
+  UserProfile({required this.id, required this.username,required this.email, required this.password, required this.blgno, required this.street, required this.zone,required this.points, required this.voucher});
 
 }

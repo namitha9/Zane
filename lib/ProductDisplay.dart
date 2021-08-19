@@ -24,14 +24,17 @@ class _ProductDisplayState extends State<ProductDisplay> {
     data = ModalRoute.of(context)!.settings.arguments as Map;
     int price = data['price'];
     var points = int.parse(data['points']);
-    List <UserProfile> users =[UserProfile(username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', voucher: 'p')];
+    List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', points: '0', voucher: 'p')];
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.grey[850],
         title: Text('Product'),
+        leading: Container(),
         actions: [
           TextButton(
               onPressed: (){
+                print(points);
+                print(data['vouchers']);
                 Navigator.pushNamed(context,'/HomePage',arguments: {
                   'picture' : 'p',
                   'price' : 'p',
@@ -45,7 +48,8 @@ class _ProductDisplayState extends State<ProductDisplay> {
                   'zone' : '00',
                   'points' : points.toString(),
                   'vouchers' : data['vouchers'],
-                  'users' : users
+                  'users' : users,
+                  'id' : '00'
                 });
               },
               child: Text('Back to Home',style: TextStyle(color: Colors.white),)
@@ -150,7 +154,7 @@ class _ProductDisplayState extends State<ProductDisplay> {
                     'counter' : counter.toString(),
                     'description' : data['description'],
                     'points' : points.toString(),
-                    'vouchers' : data['vouchers']
+                    'vouchers' : data['vouchers'] == null ? 'p' : data['vouchers']
                   });
                   },
                 label: Text('Add to Cart',style: TextStyle(color: Colors.black),),

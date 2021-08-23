@@ -164,7 +164,9 @@ class _AccountScreenState extends State<AccountScreen> {
                         ),
                         TextButton(
                             onPressed: (){
-                              print(points);
+                              changeDeets();
+                              print(users);
+                              print(users.elementAt(0).username);
                               Navigator.pushReplacementNamed(context, '/Login', arguments: {
                             'name' : 'Name',
                             'email' : 'Email',

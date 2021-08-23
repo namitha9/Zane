@@ -44,6 +44,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 TextFormField(
                   controller: name,
+                  keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                       hintText: data['name'],
                       border: OutlineInputBorder(
@@ -61,6 +62,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 TextFormField(
                   controller: email,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       hintText: data['email'],
                       border: OutlineInputBorder(
@@ -78,6 +80,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 TextFormField(
                   controller: blgno,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       hintText: data['blgno'],
                       border: OutlineInputBorder(
@@ -95,6 +98,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 TextFormField(
                   controller: street,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       hintText: data['street'],
                       border: OutlineInputBorder(
@@ -112,6 +116,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 TextFormField(
                   controller: zone,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       hintText: data['zone'],
                       border: OutlineInputBorder(

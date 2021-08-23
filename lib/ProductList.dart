@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'Item.dart';
 import 'Users.dart';
 
+class Items{
+  const Items(this.name, this.icon);
+  final String name;
+  final Icon icon;
+}
+
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
 
@@ -11,11 +17,17 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
 
+
   Map data ={};
   int catindex = 0;
   List <TotalItem> totalItems = [];
   String points = '';
   List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', points: '0', voucher: 'p')];
+  List <int> prices = [];
+  List <Items> sortby = [
+    const Items('Price Low to High', Icon(Icons.arrow_downward)),
+    const Items('Price High to Low', Icon(Icons.arrow_upward))
+  ];
 
   Widget display(catindex){
     TotalItem instance = totalItems[catindex];
@@ -115,7 +127,24 @@ class _ProductListState extends State<ProductList> {
                     primary: Colors.grey[500],
                   ),
                 ),
-              ],
+                PopupMenuButton(
+                  onSelected: ,
+                    itemBuilder: (BuildContext context){
+                      return sortby.map((Items e){
+                        return PopupMenuItem<Items>(
+                          value: e,
+                            child: Row(
+                              children: [
+                                e.icon,
+                                SizedBox(width: 2,),
+                                Text(e.name)
+                              ],
+                            )
+                        );
+                      }).toList();
+                    }
+                )
+              ]
             ),
             Row(
               children: [

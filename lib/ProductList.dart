@@ -22,6 +22,8 @@ class ProductList extends StatefulWidget {
   _ProductListState createState() => _ProductListState();
 }
 
+enum vals {Red, Black, Blue, Pink, Green}
+
 class _ProductListState extends State<ProductList> {
 
 
@@ -38,8 +40,21 @@ class _ProductListState extends State<ProductList> {
     const Items('Price Low to High', Icon(Icons.arrow_downward), '00'),
     const Items('Price High to Low', Icon(Icons.arrow_upward), '01')
   ];
+  List <Items> filterby = [
+    const Items('Color', Icon(Icons.color_lens_outlined), '02'),
+    const Items('Price Range', Icon(Icons.price_change_outlined), '03')
+  ];
+  List <Items> colorby = [
+    const Items('Red', Icon(Icons.colorize_rounded), '04'),
+    const Items('Black', Icon(Icons.colorize_rounded), '05'),
+    const Items('Blue', Icon(Icons.colorize_rounded), '06'),
+    const Items('Pink', Icon(Icons.colorize_rounded), '07'),
+    const Items('Green', Icon(Icons.colorize_rounded), '08'),
+  ];
   int pop=0;
   int y = 0;
+  String colorchoice = '';
+  vals? choice = vals.Black;
 
   Widget display(catindex){
     TotalItem instance = totalItems[catindex];
@@ -78,21 +93,6 @@ class _ProductListState extends State<ProductList> {
     );
   }
 
-  void findIndex(){
-    indexOrder = [];
-    for (int l in prices){
-      pop = 0;
-      for (TotalItem instance in totalItems){
-        if(l==instance.price){
-          //indexOrder.add(pop);
-          break;
-        }
-        pop++;
-      }
-    }
-    print(indexOrder);
-  }
-
   void select(String id) {
     indexOrder.clear();
     int p = 0;
@@ -121,44 +121,44 @@ class _ProductListState extends State<ProductList> {
     //findIndex();
   }
 
+  void filter(String id) {
+    indexOrder.clear();
+    
+  }
+
   Widget displayInPage(List <PandI>indexOrder){
     print('display');
     print(indexOrder.elementAt(0).index);
     return Padding(
       padding: EdgeInsets.all(0),
+      child:
+          Wrap(
+            direction: Axis.horizontal,
+            alignment: WrapAlignment.center,
+            children:
+              indexOrder.map((e) => display(e.index)).toList()
+          ),
+      );
+  }
+
+  Widget colorSub() {
+    return Container(
       child: Column(
-        children: [
-          Row(
-            children: [
-              display(indexOrder.elementAt(0).index),
-              display(indexOrder.elementAt(1).index),
-            ],
-          ),
-          Row(
-            children: [
-              display(indexOrder.elementAt(2).index),
-              display(indexOrder.elementAt(3).index),
-            ],
-          ),
-          Row(
-            children: [
-              display(indexOrder.elementAt(4).index),
-              display(indexOrder.elementAt(5).index),
-            ],
-          ),
-          Row(
-            children: [
-              display(indexOrder.elementAt(6).index),
-              display(indexOrder.elementAt(7).index),
-            ],
-          ),
-          Row(
-            children: [
-              display(indexOrder.elementAt(8).index),
-              display(indexOrder.elementAt(9).index),
-            ],
-          ),
-        ],
+        children: colorby.map((Items e){
+          return ListTile(
+            title: Text(e.name),
+            leading: Radio<vals>(
+              value: vals.Black,
+              groupValue: choice,
+              onChanged: (vals? value){
+                setState(() {
+                  choice = value;
+                });
+              },
+              activeColor: Colors.grey[800],
+            ),
+          );
+        }).toList(),
       ),
     );
   }
@@ -212,23 +212,36 @@ class _ProductListState extends State<ProductList> {
                 Row(
                   children: [
                     Text('FILTER'),
-                    PopupMenuButton(
+                    PopupMenuButton<String>(
                         onSelected: select,
                         icon: Icon(Icons.filter_alt_outlined),
-                        itemBuilder: (BuildContext context){
-                          return sortby.map((Items e){
-                            return PopupMenuItem<String>(
-                                value: e.id,
-                                child: Row(
-                                  children: [
-                                    e.icon,
-                                    SizedBox(width: 2,),
-                                    Text(e.name)
-                                  ],
-                                )
-                            );
-                          }).toList();
-                        }
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                          PopupMenuItem<String>(
+                            value: filterby.elementAt(0).id,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      filterby.elementAt(0).icon,
+                                      SizedBox(width: 2,),
+                                      Text(filterby.elementAt(0).name)
+                                    ],
+                                  ),
+                                  colorSub()
+                                ],
+                              )
+                          ),
+                          PopupMenuItem<String>(
+                              value: filterby.elementAt(0).id,
+                              child: Row(
+                                children: [
+                                  filterby.elementAt(1).icon,
+                                  SizedBox(width: 2,),
+                                  Text(filterby.elementAt(1).name)
+                                ],
+                              )
+                          ),
+                        ]
                     ),
                   ],
                 ),

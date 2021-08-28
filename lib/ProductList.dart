@@ -34,7 +34,7 @@ class _ProductListState extends State<ProductList> {
   List <UserProfile> users =[UserProfile(id: '00', username: 'Name', email: 'Email', password: 'Password', blgno: '00', street: '000', zone: '00', points: '0', voucher: 'p')];
   List <int> prices = [];
   List <PandI> dupe = [];
-  static List <PandI> indexOrder = [];
+  List <PandI> indexOrder = [];
   //static List <int> indexOrder = [];
   List <Items> sortby = [
     const Items('Price Low to High', Icon(Icons.arrow_downward), '00'),
@@ -50,11 +50,14 @@ class _ProductListState extends State<ProductList> {
     const Items('Blue', Icon(Icons.colorize_rounded), '06'),
     const Items('Pink', Icon(Icons.colorize_rounded), '07'),
     const Items('Green', Icon(Icons.colorize_rounded), '08'),
+    const Items('All', Icon(Icons.colorize_rounded), '09')
   ];
   int pop=0;
   int y = 0;
   String colorchoice = '';
   vals? choice = vals.Black;
+  String? dropdownvalue = 'FILTER';
+  List <String> cat = [];
 
   Widget display(catindex){
     TotalItem instance = totalItems[catindex];
@@ -94,13 +97,14 @@ class _ProductListState extends State<ProductList> {
   }
 
   void select(String id) {
-    indexOrder.clear();
     int p = 0;
-    for (TotalItem instance in totalItems){
-      setState(() {
-        indexOrder.add(PandI(instance.price, p));
-        p++;
-      });
+    if(indexOrder.isEmpty){
+      for (TotalItem instance in totalItems){
+        setState(() {
+          indexOrder.add(PandI(instance.price, p));
+          p++;
+        });
+      }
     }
     if(id == '00'){
       setState(() {
@@ -121,46 +125,98 @@ class _ProductListState extends State<ProductList> {
     //findIndex();
   }
 
-  void filter(String id) {
-    indexOrder.clear();
-    
-  }
-
   Widget displayInPage(List <PandI>indexOrder){
     print('display');
     print(indexOrder.elementAt(0).index);
     return Padding(
       padding: EdgeInsets.all(0),
       child:
-          Wrap(
-            direction: Axis.horizontal,
-            alignment: WrapAlignment.center,
-            children:
-              indexOrder.map((e) => display(e.index)).toList()
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Wrap(
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.start,
+                children:
+                  indexOrder.map((e) => display(e.index)).toList()
+              ),
+            ],
           ),
       );
   }
 
   Widget colorSub() {
-    return Container(
+    return PopupMenuButton(
+      onSelected: (String result){
+        setState(() {
+          filterlist(result);
+        });
+      },
+      onCanceled: (){
+        if(Navigator.canPop(context)){
+          Navigator.pop(context);
+        }
+      },
+      offset: Offset(150,0),
       child: Column(
-        children: colorby.map((Items e){
-          return ListTile(
-            title: Text(e.name),
-            leading: Radio<vals>(
-              value: vals.Black,
-              groupValue: choice,
-              onChanged: (vals? value){
-                setState(() {
-                  choice = value;
-                });
-              },
-              activeColor: Colors.grey[800],
-            ),
-          );
-        }).toList(),
+        children: [
+          Row(
+            children: [
+              filterby.elementAt(0).icon,
+              SizedBox(width: 2,),
+              Text(filterby.elementAt(0).name)
+            ],
+          ),
+        ],
       ),
+        itemBuilder: (BuildContext context){
+          return colorby.map((Items e){
+            return PopupMenuItem<String>(
+                value: e.id,
+                child: Text(e.name)
+            );
+          }).toList();
+        }
     );
+  }
+
+  void filterlist(String id) {
+    indexOrder.clear();
+    int p =0;
+    for(TotalItem instance in totalItems){
+      cat = List.from(instance.categories);
+      for(String k in cat){
+        if(id=='04' && k=='red'){
+          indexOrder.add(PandI(instance.price, p));
+          break;
+        }
+        if(id=='05' && k=='black'){
+          indexOrder.add(PandI(instance.price, p));
+          break;
+        }
+        if(id=='06' && k=='blue'){
+          indexOrder.add(PandI(instance.price, p));
+          break;
+        }
+        if(id=='07' && k=='pink'){
+          indexOrder.add(PandI(instance.price, p));
+          break;
+        }
+        if(id=='08' && k=='green'){
+          indexOrder.add(PandI(instance.price, p));
+          break;
+        }
+        if(id=='09'){
+          indexOrder.add(PandI(instance.price, p));
+          break;
+        }
+      }
+      p++;
+    }
+    for(PandI instance in indexOrder){
+      print(instance.index);
+    }
   }
 
   @override
@@ -181,6 +237,7 @@ class _ProductListState extends State<ProductList> {
         actions: [
           TextButton(
               onPressed: (){
+                indexOrder.clear();
                 Navigator.pushReplacementNamed(context,'/HomePage',arguments: {
                   'picture' : 'p',
                   'price' : 'p',
@@ -212,24 +269,13 @@ class _ProductListState extends State<ProductList> {
                 Row(
                   children: [
                     Text('FILTER'),
-                    PopupMenuButton<String>(
+                    PopupMenuButton(
                         onSelected: select,
                         icon: Icon(Icons.filter_alt_outlined),
-                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                        itemBuilder: (BuildContext context) => [
                           PopupMenuItem<String>(
                             value: filterby.elementAt(0).id,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      filterby.elementAt(0).icon,
-                                      SizedBox(width: 2,),
-                                      Text(filterby.elementAt(0).name)
-                                    ],
-                                  ),
-                                  colorSub()
-                                ],
-                              )
+                              child: colorSub()
                           ),
                           PopupMenuItem<String>(
                               value: filterby.elementAt(0).id,

@@ -58,6 +58,8 @@ class _ProductListState extends State<ProductList> {
   vals? choice = vals.Black;
   String? dropdownvalue = 'FILTER';
   List <String> cat = [];
+  int price = 55;
+  RangeValues priceRange = RangeValues(0, 300);
 
   Widget display(catindex){
     TotalItem instance = totalItems[catindex];
@@ -117,6 +119,11 @@ class _ProductListState extends State<ProductList> {
         dupe = List.from(indexOrder);
         indexOrder = [];
         indexOrder = List.from(dupe.reversed);
+      });
+    }
+    if(id == '03'){
+      setState(() {
+        priceSlider();
       });
     }
     for(PandI instance in indexOrder){
@@ -219,6 +226,53 @@ class _ProductListState extends State<ProductList> {
     }
   }
 
+  void priceSlider (){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) =>
+            AlertDialog(
+              title: Text('Price Range Slider'),
+              content: RangeSlider(
+                  values: priceRange,
+                  min: 0,
+                  max: 300,
+                  divisions: 50,
+                  activeColor: Colors.grey[800],
+                  inactiveColor: Colors.grey[200],
+                  labels: RangeLabels(
+                    '${priceRange.start.round().toString()} ',
+                    '${priceRange.end.round().toString()} '
+                  ),
+                  onChanged: (RangeValues vals){
+                    print(priceRange.start);
+                    setState(() {
+                      priceRange = vals;
+                    });
+                  },
+              ),
+              actions: [
+                TextButton(onPressed: () {Navigator.pop(context);},
+                    child: Text('Next')),
+              ],
+            )
+    );
+
+    print('Hush');
+    priceChange();
+  }
+
+
+  void priceChange(){
+    indexOrder.clear();
+    int p=0;
+    for (TotalItem instance in totalItems){
+      if(instance.price<=priceRange.end && instance.price>=priceRange.start){
+        indexOrder.add(PandI(instance.price, p));
+      }
+      p++;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments as Map;
@@ -278,7 +332,7 @@ class _ProductListState extends State<ProductList> {
                               child: colorSub()
                           ),
                           PopupMenuItem<String>(
-                              value: filterby.elementAt(0).id,
+                              value: filterby.elementAt(1).id,
                               child: Row(
                                 children: [
                                   filterby.elementAt(1).icon,
